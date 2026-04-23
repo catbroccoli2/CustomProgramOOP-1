@@ -12,3 +12,4 @@ C:\msys64\home\catbr\CustomProgramOOP-1\src\obj\Debug\net10.0\refint\src.dll
 C:\msys64\home\catbr\CustomProgramOOP-1\src\obj\Debug\net10.0\src.pdb
 C:\msys64\home\catbr\CustomProgramOOP-1\src\obj\Debug\net10.0\src.genruntimeconfig.cache
 C:\msys64\home\catbr\CustomProgramOOP-1\src\obj\Debug\net10.0\ref\src.dll
+C:\msys64\home\catbr\CustomProgramOOP-1\src\obj\Debug\net10.0\src.sourcelink.json

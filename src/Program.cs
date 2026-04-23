@@ -4,49 +4,65 @@ using System.Data;
 using System.Diagnostics;
 using SplashKitSDK;
 
-namespace GameName
+namespace FirstFantasy
 {
     public class Program
-    {
-        public static void Main()
+{
+    public static void Main()
         {
-            Window window = new Window("GameName", 800, 600); 
-            SplashKit.OpenAudio();
-
-            double PlayerX = 100;
-            double PlayerY = 100;
-            double speed = 3;
-
-            //main game loop 
-            do
+            try
             {
-                SplashKit.ProcessEvents();
-                SplashKit.ClearScreen();
+                RunGame();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("crash: " + ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Press Enter to exit");
+                Console.ReadLine();
+            }
+        }
+    public static void RunGame()
+    {
+        Window window = new Window("First Fantasy", 800, 600);
 
-                
-                SplashKit.FillRectangle(Color.Red, PlayerX, PlayerY, 100, 100);
-                
-                if (SplashKit.KeyDown(KeyCode.AKey) || SplashKit.KeyDown(KeyCode.DownKey))
+        Player player = new Player(400, 400, 3);
+
+        List<Entity> entities = new List<Entity>();
+        entities.Add(player);
+        entities.Add(new Enemy("Goblin", 100, 100, 30, 1.5, player));
+
+        while (!window.CloseRequested)
+        {
+            SplashKit.ProcessEvents();
+
+
+            foreach (Entity e in entities)
                 {
-                    PlayerY += speed;
-                }else if (SplashKit.KeyDown(KeyCode.WKey) || SplashKit.KeyDown(KeyCode.UpKey))
-                {
-                    PlayerY -= speed;
-                }else if (SplashKit.KeyDown(KeyCode.AKey) || SplashKit.KeyDown(KeyCode.LeftKey))
-                {
-                    PlayerX -= speed;
-                }else if (SplashKit.KeyDown(KeyCode.DKey) || SplashKit.KeyDown(KeyCode.RightKey))
-                {
-                    PlayerX += speed;
+                    e.Update();
                 }
 
-                SplashKit.RefreshScreen(60);
-                
+            
 
+            foreach (Entity e in entities)
+                {
+                    if (e is Enemy enemy && enemy.IsActive)
+                    {
+                        if (player.CollidesWith(enemy))
+                        {
+                            Console.WriteLine($"Player collided with: {enemy.Name}");
+                        }
+                    }
+                }
+            window.Clear(Color.White);
 
-            } while (!window.CloseRequested);
-
-            SplashKit.CloseAudio();
+            foreach (Entity e in entities)
+                {
+                    e.Draw();
+                }
+            
+            window.Refresh(60);
         }
     }
+}
 }
