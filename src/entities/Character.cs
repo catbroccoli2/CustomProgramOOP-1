@@ -8,12 +8,15 @@ namespace FirstFantasy
         public string Name { get; protected set; }
         public int HP { get; protected set; }
         public int MaxHP { get; protected set; }
+        public int Attack {get; protected set; }
 
-        public Character(string name, int MaxHp, int Hp, double StartX, double StartY) : base(StartX, StartY, 50, 50)
+
+        public Character(string name, int MaxHp, int Hp, int attack, double StartX, double StartY) : base(StartX, StartY, 50, 50)
         {
             Name = name;
             HP = MaxHp;
             MaxHP = MaxHp;
+            Attack = attack;
 
         }
 

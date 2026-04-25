@@ -6,8 +6,8 @@ namespace FirstFantasy
     {
         private double _speed;
 
-        public Player(double startX, double startY, double speed)
-            : base("Hero", 100, 100, startX, startY )
+        public Player(double startX, double startY, double speed, int attack)
+            : base("Hero", 100, 100, 15, startX, startY )
         {
             _speed = speed;
         }

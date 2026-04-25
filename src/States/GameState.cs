@@ -15,11 +15,11 @@ namespace FirstFantasy
         public GameState(Window window)
         {
             GameWindow = window;
-            Player = new Player(400, 400, 3);
+            Player = new Player(400, 400, 3, 15);
 
             Entities = new List<Entity>();
             Entities.Add(Player);
-            Entities.Add(new Enemy("Goblin", 200, 200, 100, 1.5, Player));
+            Entities.Add(new Enemy("Goblin", 200, 200, 100, 8, 1.5, Player));
 
             _currentState = new ExploringState(this);
             _currentState.OnEnter();

@@ -7,8 +7,8 @@ namespace FirstFantasy
         private double _speed;
         private Player _target;
 
-        public Enemy(string name, double startX, double startY, int maxHP, double speed, Player target)
-            : base(name, 100, 100, startX, startY)
+        public Enemy(string name, double startX, double startY, int maxHP, int attack, double speed, Player target)
+            : base(name, 100, 100, attack ,startX, startY)
         {
             _speed = speed;
             _target = target;
