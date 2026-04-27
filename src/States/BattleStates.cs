@@ -97,7 +97,7 @@ namespace FirstFantasy
 
         public void EnemyTurn()
         {
-            _commandQueue.Enqueue(new AttackCommand(_enemy, _game.Player));
+            _commandQueue.Enqueue(_enemy.DecideAction(_game.Player));
         }
         public void Draw()
         {

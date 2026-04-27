@@ -20,6 +20,10 @@ namespace FirstFantasy
             Entities = new List<Entity>();
             Entities.Add(Player);
             Entities.Add(new Enemy("Goblin", 200, 200, 100, 8, 1.5, Player));
+            Enemy orc = new Enemy("Orc", 600, 200, 50, 12, 1.0, Player);
+            orc.strategy = new DefensiveStrategy();
+            Entities.Add(orc);
+
 
             _currentState = new ExploringState(this);
             _currentState.OnEnter();
