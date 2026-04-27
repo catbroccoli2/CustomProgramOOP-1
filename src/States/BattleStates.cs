@@ -38,9 +38,20 @@ namespace FirstFantasy
         public void HandleInput()
         {
             if (!_playerTurn) return;
-            if (SplashKit.KeyTyped(KeyCode.SpaceKey))//placeholder
+            if (SplashKit.KeyTyped(KeyCode.Num1Key))//placeholder
             {
                 _commandQueue.Enqueue(new AttackCommand(_game.Player, _enemy));
+                _playerTurn = false;
+            }
+            if (SplashKit.KeyTyped(KeyCode.Num2Key))
+            {
+                _commandQueue.Enqueue(new DefendCommand(_game.Player));
+                _playerTurn = false;
+            }
+            if (SplashKit.KeyTyped(KeyCode.Num3Key))
+            {
+                Skill fireball = _game.Player.Skills[0];
+                _commandQueue.Enqueue(new SpellCommand(_game.Player, _enemy, fireball));
                 _playerTurn = false;
             }
 
@@ -55,7 +66,7 @@ namespace FirstFantasy
                 ICommand cmd = _commandQueue.Dequeue();
                 if (cmd.CanExecute())
                 {
-                    cmd.Execute();
+                    cmd.Execute();  
                     _combatLog.Add(cmd.Describe()); // add to combat log thingy
                 }
 
@@ -71,7 +82,7 @@ namespace FirstFantasy
                 if (!_game.Player.IsAlive)
                 {
                     _combatLog.Add($"The player has been defeated!");
-                    _game.ChangeState(new ExploringState(_game));
+                    _game.ChangeState(new GameOverState(_game));
                     return;
 
                 }
@@ -96,12 +107,13 @@ namespace FirstFantasy
             SplashKit.DrawText($"{_enemy.Name}", Color.White, 350, 100);
             SplashKit.DrawText($"HP: {_enemy.HP}/{_enemy.MaxHP}",
                 Color.White, 350, 130);
+            
 
             // Draw player status
             SplashKit.DrawText($"{_game.Player.Name}", Color.White, 50, 450);
             SplashKit.DrawText($"HP: {_game.Player.HP}/{_game.Player.MaxHP}",
                 Color.White, 50, 480);
-
+            SplashKit.DrawText($"MP: {_game.Player.MP}/{_game.Player.MaxMP}", Color.White, 50, 500);
             // Draw combat log (last 4 entries)
             int startY = 320;
             int start = Math.Max(0, _combatLog.Count - 4);
@@ -110,6 +122,10 @@ namespace FirstFantasy
                 SplashKit.DrawText(_combatLog[i],
                     Color.White, 50, startY + (i - start) * 20);
             }
+
+            SplashKit.DrawText("1: Attack, 2: Defend, 3: Cast Fireball",Color.White, 400, 650);
+
+
 
         }
     }

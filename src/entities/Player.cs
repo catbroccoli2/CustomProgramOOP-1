@@ -5,11 +5,13 @@ namespace FirstFantasy
     public class Player : Character
     {
         private double _speed;
+        public List<Skill> Skills {get; private set;} = new List<Skill>();
 
         public Player(double startX, double startY, double speed, int attack)
-            : base("Hero", 100, 100, 15, startX, startY )
+            : base("Hero", 100, 15, startX, startY, 50)
         {
             _speed = speed;
+            Skills.Add(new Skill("Fireball", 5, 20));
         }
 
         public override void Update()

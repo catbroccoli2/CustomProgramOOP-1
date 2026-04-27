@@ -19,16 +19,15 @@ namespace FirstFantasy
             return _attacker.IsAlive && _target.IsAlive;
         }
 
-        public string Describe()
-        {
-            return $"{_attacker.Name} attacked {_target.Name} and Dealt: {_damageDealt} Damage!";
-        }
-
         public void Execute()
         {
             if (!CanExecute()) return;
-            _damageDealt = Math.Max(1, _attacker.Attack);
-            _target.TakeDamage(_damageDealt);
+            int rawDamage = Math.Max(1, _attacker.Attack);
+            _damageDealt = _target.TakeDamage(rawDamage);
+        }
+        public string Describe()
+        {
+            return $"{_attacker.Name} attacked {_target.Name} and Dealt: {_damageDealt} Damage!";
         }
     }
 }

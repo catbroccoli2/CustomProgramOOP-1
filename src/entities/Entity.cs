@@ -30,6 +30,12 @@ namespace FirstFantasy
             return SplashKit.RectanglesIntersect(Bounds, other.Bounds);
         }
 
+        public void MoveTo(int newX, int newY)
+        {
+            X = newX;
+            Y = newY;
+        }
+
         public abstract void Update();
         public abstract void Draw();
 
